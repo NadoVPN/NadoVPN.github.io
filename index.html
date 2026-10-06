@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NadoVPN — Secure VPN for Android</title>
+    <meta name="description" content="NadoVPN is a modern VPN client for Android, designed for privacy, security and reliable connectivity.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1020;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        /* Header */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 16, 32, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            opacity: 0.65;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* Hero */
+
+        .hero {
+            padding: 100px 0 90px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+            color: #cbd5e1;
+            font-size: 13px;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 9vw, 78px);
+            line-height: 1.05;
+            letter-spacing: -3px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            opacity: 0.55;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #aab4c8;
+            font-size: 18px;
+        }
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #0b1020;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #ffffff;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* Sections */
+
+        section {
+            padding: 85px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #9da8bc;
+        }
+
+        /* Features */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: rgba(255,255,255,0.08);
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .card p {
+            color: #9da8bc;
+            font-size: 15px;
+        }
+
+        /* About */
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .about h2 {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .about p {
+            color: #aab4c8;
+            margin-bottom: 15px;
+        }
+
+        .about-box {
+            padding: 35px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .about-box strong {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* Download */
+
+        .download {
+            text-align: center;
+            padding: 75px 25px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .download h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .download p {
+            color: #aab4c8;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .version {
+            display: block;
+            margin-top: 15px;
+            color: #7f8ba3;
+            font-size: 13px;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 35px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-content p {
+            color: #7f8ba3;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            color: #aab4c8;
+            font-size: 14px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 750px) {
+
+            .nav {
+                min-height: 62px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 75px 0 65px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2,
+            .about h2,
+            .download h2 {
+                font-size: 30px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="#" class="logo">Nado<span>VPN</span></a>
+
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#download">Download</a></li>
+            <li>
+                <a href="https://github.com/NadoVPN" target="_blank">
+                    GitHub
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+
+<main>
+
+    <!-- Hero -->
+
+    <section class="hero">
+        <div class="container">
+
+            <div class="badge">
+                Official NadoVPN Website
+            </div>
+
+            <h1>
+                NadoVPN<span>.</span>
+            </h1>
+
+            <p>
+                A modern VPN client for Android, designed for
+                privacy, security and reliable connectivity.
+            </p>
+
+            <div class="buttons">
+
+                <a
+                    class="btn btn-primary"
+                    href="https://github.com/NadoVPN/NadoVPN/releases"
+                    target="_blank">
+                    Download NadoVPN
+                </a>
+
+                <a
+                    class="btn btn-secondary"
+                    href="https://github.com/NadoVPN/NadoVPN"
+                    target="_blank">
+                    View on GitHub
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Features -->
+
+    <section id="features">
+
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Features</h2>
+                <p>Built with reliability and privacy in mind.</p>
+            </div>
+
+            <div class="features">
+
+                <div class="card">
+                    <div class="icon">⚡</div>
+                    <h3>Fast Connection</h3>
+                    <p>
+                        Designed to establish VPN connections
+                        quickly and maintain reliable connectivity.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🔒</div>
+                    <h3>Privacy Focused</h3>
+                    <p>
+                        NadoVPN is designed with privacy and
+                        secure network communication in mind.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🛡️</div>
+                    <h3>Connection Protection</h3>
+                    <p>
+                        Intelligent connection monitoring helps
+                        maintain a stable VPN session.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Android Native</h3>
+                    <p>
+                        Built specifically for Android devices
+                        with a simple and focused experience.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">🔄</div>
+                    <h3>Auto Reconnect</h3>
+                    <p>
+                        Connection monitoring can help recover
+                        from unexpected network interruptions.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="icon">📊</div>
+                    <h3>Connection Statistics</h3>
+                    <p>
+                        Keep track of your VPN connection and
+                        network usage information.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+
+    <section id="about">
+
+        <div class="container about">
+
+            <div>
+                <h2>Built for Android.</h2>
+
+                <p>
+                    NadoVPN is an Android VPN client focused on
+                    providing a clean, reliable and privacy-oriented
+                    VPN experience.
+                </p>
+
+                <p>
+                    The project is continuously evolving with
+                    improvements to connectivity, performance and
+                    user experience.
+                </p>
+            </div>
+
+            <div class="about-box">
+
+                <strong>Official Project</strong>
+
+                <p>
+                    This is the official NadoVPN website and GitHub
+                    organization.
+                </p>
+
+                <br>
+
+                <strong>Platform</strong>
+
+                <p>
+                    Android
+                </p>
+
+                <br>
+
+                <strong>Project</strong>
+
+                <p>
+                    NadoVPN
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Download -->
+
+    <section id="download">
+
+        <div class="container">
+
+            <div class="download">
+
+                <h2>Get NadoVPN</h2>
+
+                <p>
+                    Download the latest official NadoVPN release
+                    from GitHub.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        class="btn btn-primary"
+                        href="https://github.com/NadoVPN/NadoVPN/releases"
+                        target="_blank">
+                        Download Latest Release
+                    </a>
+
+                </div>
+
+                <span class="version">
+                    Official NadoVPN releases
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <div class="container footer-content">
+
+        <p>
+            © 2026 NadoVPN. All rights reserved.
+        </p>
+
+        <div class="footer-links">
+
+            <a
+                href="https://github.com/NadoVPN"
+                target="_blank">
+                GitHub
+            </a>
+
+            <a
+                href="https://github.com/NadoVPN/NadoVPN/releases"
+                target="_blank">
+                Releases
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+  </html>
